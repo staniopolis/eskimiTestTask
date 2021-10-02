@@ -54,7 +54,7 @@ object CampaignManager {
     // Filter each Campaigns list of Banners by matching to the requested
     lazy val campaignsFilteredByValidBanners =
       impressionsMapedToCampaignsByBidFloor.map(kv => kv._1 -> kv._2.map(campaigns =>
-        Campaign(campaigns.id, campaigns.country, campaigns.targeting, campaigns.banners.filter(bannerFilter(kv._1, _)), campaigns.bid)))
+        campaigns.copy(banners = campaigns.banners.filter(bannerFilter(kv._1, _)))))
 
     // Filter out Campaigns with empty list of Banners
     lazy val campaignsFilteredWithNonEmptyBanners =
